@@ -1,7 +1,10 @@
 package ru.java.courses;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+
+import static org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.Conversions.toUpperCase;
 
 class Lesson2 {
 
@@ -32,12 +35,31 @@ class Lesson2 {
      * @return возвращаем инициалы в верхнем регистре разделенные точкой, как в примере выше
      */
     static String initials(String fullName) {
+    /**
+    *Простейшая запись:
+    */
 /*        String[] str = fullName.trim().split(" ");
-        return Array.get(str, 0).toString().toUpperCase().charAt(0) + "." +
-                Array.get(str, 1).toString().toUpperCase().charAt(0) + "." +
-                Array.get(str, 2).toString().toUpperCase().charAt(0) + ".";*/
-
-        return String.join("", Arrays.stream(fullName.trim().split(" "))
-                .map(string -> string.toUpperCase().charAt(0) + ".").toArray(String[]::new));
+        return  (str[0].charAt(0) + "." + str[1].charAt(0) + "." + str[2].charAt(0) + ".").toUpperCase();*/
+    /**
+     *Функциональная запись для изначального типа данных:
+     */
+/*        return String.join("", Arrays.stream(fullName.trim().split(" "))
+                .map(string -> string.toUpperCase().charAt(0) + ".").toArray(String[]::new));*/
+    /**
+     *Функциональная запись с проверками:
+     */
+    String trash = "1234567890!@#$%^&*()_+-={}[]\"'|<>,.?/\\:";
+    return String.join("", Arrays.stream(fullName.trim().split(" "))
+            .map(string -> {
+                try{
+                    if(trash.indexOf(string.charAt(0)) == -1){
+                        return ((string.charAt(0)) + ".").toUpperCase();
+                    }
+                    else return "";
+                } catch (Exception e) {
+                    return "";
+                }
+            }).toArray(String[]::new));
     }
+
 }

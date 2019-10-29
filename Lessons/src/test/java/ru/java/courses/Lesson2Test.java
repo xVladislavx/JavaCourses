@@ -24,6 +24,9 @@ public class Lesson2Test {
 
     @Test
     public void initials() {
+        assertEquals("", Lesson2.initials(" "), "Single space");
+        assertEquals("И.И.П.", Lesson2.initials("    35--92 Иванов Иван Петрович  44   "), "Multiple spaces AND a single letter");
+        assertEquals("", Lesson2.initials(" ,. .S   35--92 44"), "Multiple spaces AND a string starting with \".\"");
         assertEquals("И.И.П.", Lesson2.initials("Иванов Иван Петрович"), "Иванов Иван Петрович → И.И.П.");
         assertEquals("И.И.П.", Lesson2.initials("иванов иван петрович"), "иванов иван петрович → И.И.П.");
         assertEquals("П.А.Н.", Lesson2.initials("Петров алексей Никифорович"), "Петров алексей Никифорович → П.А.Н.");
